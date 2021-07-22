@@ -1,3 +1,14 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users
+  root 'posts#index'
+
+  resources :posts do
+    resources :comments
+    member do
+      delete :delete_image_attachment
+     end
+  end
+
 end

@@ -1,0 +1,41 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id='error_explanation'>
+      <h4 class='text-danger'><%= pluralize(post.errors.count, 'error') %> prohibited this post from being saved:</h4>
+
+      <ul class='list-group'>
+        <% post.errors.full_messages.each do |message| %>
+          <li class='list-group-item list-group-item-danger'><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='form-group'>
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+
+
+
+  <% if post.persisted?%>
+      <% post.files.each do |file| %>
+        <% if file.persisted?%>
+          <%= image_tag(file, size: '120x120', alt: 'Unsupported attachment') %>
+          <%= link_to 'Remove', delete_image_attachment_post_path(file), method: :delete, data: {confirm: 'Are you sure?'} %>
+        <% end %>
+      <% end %>
+  <% end %>
+
+  <div class='form-group'>
+    <%= form.label :body %>
+    <%= form.text_area :body, class: 'form-control' %>
+  </div>
+
+  <div class='form-group'>
+    <%= form.label :files %>
+    <%= form.file_field :files, direct_upload: true, multiple: true, class: 'form-control' %>
+  </div>
+
+  <%= form.submit 'Save Post', class: 'btn btn-primary' %>
+<% end %>

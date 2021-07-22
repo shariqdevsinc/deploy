@@ -1,0 +1,18 @@
+<h1>Posts</h1>
+
+<%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+<%if user_signed_in?%>
+<%= link_to 'Delete Session', destroy_user_session_path, method: :delete, class: 'btn btn-primary' %>
+<%else%>
+<%= link_to 'Create Session', new_user_session_path, class: 'btn btn-primary' %>
+<%end%>
+<hr>
+<% @posts.each do |post| %>
+  <div class='card'>
+    <div class='card-body'>
+      <h5 class='card-title'><%= link_to post.title, post_path(post) %></h5>
+      <p class='card-text'><%= truncate(post.body, length: 60) %></p>
+      <%= link_to 'Edit', edit_post_path(post), class: 'card-link' %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,22 @@
+<div class='card my-5'>
+  <div class='card-body'>
+
+    <h1 class='text-center'><%= @post.title %></h1>
+    <br>
+    <div class='my-4'>
+      <% @post.files.each do |file| %>
+        <%= link_to image_tag(file, size: '220x220', alt: 'Unsupported attachment'), url_for(file) %>
+      <% end %>
+      <br><br>
+      <%= simple_format(@post.body) %>
+    </div>
+
+    <%= link_to 'Back', posts_path, class: 'btn btn-light' %>
+    <%= render partial: 'comments/comment_form', locals: { post: @post } %>
+  <div id='comment-form-<%= @post.id %>'></div>
+
+  <div class='card-body'>
+    <p class='font-weight-bold'>Post Comments</p>
+    <%= render @post.comments %>
+  </div>
+</div>

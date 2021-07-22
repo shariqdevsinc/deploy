@@ -1,5 +1,5 @@
 {
-  "name": "myapp2",
-  "private": true,
-  "dependencies": {}
+  'name': 'myapp',
+  'private': true,
+  'dependencies': {}
 }

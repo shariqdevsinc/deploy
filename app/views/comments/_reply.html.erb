@@ -1,0 +1,9 @@
+<div class='card ml-5'>
+  <div class='card-body'>
+    <%= reply.name %> replied:<br>
+    '<%= reply.body %>'<br>
+    <% if reply.image.attached? == true %>
+      <%= link_to image_tag(reply.image, size: '120x120', alt: 'Unsupported attachment'), url_for(reply.image) %>
+      <% end %>
+    </div>
+</div>
